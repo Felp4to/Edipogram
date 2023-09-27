@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: connessioniservicedb
+  namespace: edipogram
+spec:
+  selector:
+    matchLabels:
+      app: connessioniservicedb
+  template:
+    metadata:
+      labels:
+        app: connessioniservicedb
+    spec:
+      containers:
+        - name: connessioniservicedb
+          image: postgres
+          ports:
+            - name: http
+              containerPort: 5432
+          env:
+            - name: POSTGRES_PASSWORD
+              value: root
+            - name: POSTGRES_DB
+              value: connessioniServiceDB
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: connessioniservicedb
+  labels:
+    app: connessioniservicedb
+  namespace: edipogram
+spec:
+  selector:
+    app: connessioniservicedb
+  ports:
+    - protocol: TCP
+      port: 5432

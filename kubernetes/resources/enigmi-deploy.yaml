@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: enigmi
+  namespace: edipogram
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: enigmi
+  template:
+    metadata:
+      labels:
+        app: enigmi
+    spec:
+      containers:
+        - name: enigmi
+          image: tibbo93/enigmi-service:kube-amd64
+          ports:
+            - name: http
+              containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: enigmi
+  namespace: edipogram
+spec:
+  selector:
+    app: enigmi
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080

@@ -1,0 +1,8 @@
+.gradle/
+.idea/
+gradle/
+connessioniservicedb-data/
+enigmiseguitiservicedb-data
+enigmiservicedb-data
+gradlew
+gradlew.bat
